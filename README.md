@@ -6,14 +6,14 @@ This guide will walk you through the steps required to integrate ImGui into a Wi
 
 Step 1: Setting Up ImGui
 
-A. Download ImGui
+a. Download ImGui
 
 Clone the ImGui repository from GitHub:
 
 ```bash
 git clone https://github.com/ocornut/imgui.git
 ```
-B. Include ImGui in the Project
+b. Include ImGui in the Project
 	
 Navigate to the imgui folder and add the following files to the it:
 	
@@ -35,7 +35,7 @@ Navigate to the imgui folder and add the following files to the it:
 	imstb_truetype.h
 	
 	
-C. Linking Libraries
+c. Linking Libraries
 
 Add the necessary ImGui files:
 
@@ -43,7 +43,7 @@ Add the necessary ImGui files:
 	#include "imgui_impl_win32.h"
 	#include "imgui_impl_opengl3.h"
 	
-D. Add a global Function declaration
+d. Add a global Function declaration
 
 	extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND, UINT, WPARAM, LPARAM);
 	
@@ -92,7 +92,7 @@ ImGui_ImplOpenGL3_Init("#version 460"); initializes ImGui for OpenGL 3.
 	
 Step 3: Modifying the Rendering Loop
 	
-A. Start the ImGui Frame
+a. Start the ImGui Frame
 
 Before we start rendering, we need to start the ImGui frame, to do so add the imgui_display function which is given below in the code
 and call it inside game loop before display()
@@ -122,7 +122,7 @@ ImGui::Text("Hello, world!"); adds text inside the ImGui window.
 ImGui::End(); closes the ImGui window.
 	
 	
-B. Render ImGui:
+b. Render ImGui:
 
 Add below code in display After rendering code
 	
