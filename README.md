@@ -4,7 +4,7 @@ Overview
 
 This guide will walk you through the steps required to integrate ImGui into a Win32 OpenGL application. We will cover everything from setting up ImGui, modifying the rendering loop, and linking ImGui to the project.
 
-Step 1: Setting Up ImGui
+### Step 1: Setting Up ImGui
 
 a. Download ImGui
 
@@ -47,7 +47,7 @@ d. Add a global Function declaration
 
 	extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND, UINT, WPARAM, LPARAM);
 	
-Step 2: Initialization of ImGui
+### Step 2: Initialization of ImGui
 
 Add imgui_initialization function which is given below in the code and call it in WinMain function before the Game loop:
 
@@ -90,7 +90,7 @@ ImGui_ImplOpenGL3_Init("#version 460"); initializes ImGui for OpenGL 3.
 	
 	
 	
-Step 3: Modifying the Rendering Loop
+### Step 3: Modifying the Rendering Loop
 	
 a. Start the ImGui Frame
 
@@ -134,7 +134,7 @@ Explanation:
 ImGui::Render(); finalizes the ImGui frame.
 ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData()); renders the ImGui frame using OpenGL.	
 	
-Step 4: Cleanup
+### Step 4: Cleanup
 Shutdown ImGui on Program Exit
 
 Before the application exits, ensure that ImGui is properly shut down:
@@ -151,7 +151,7 @@ ImGui_ImplWin32_Shutdown(); cleans up the Win32 implementation.
 ImGui::DestroyContext(); destroys the ImGui context, freeing up resources.
 	
 	
-Step 5: Compile and Run
+### Step 5: Compile and Run
 
 Build the Project
 	
