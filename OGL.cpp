@@ -378,6 +378,17 @@ void imgui_display(void)
         ImGui::SliderFloat3("Right Bottom Vertex", bottomRightVertexColor, 0.0f, 1.0f);
     }
     ImGui::End();
+
+    ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_FirstUseEver);      // top-left corner
+    ImGui::SetNextWindowSize(ImVec2(150, 100), ImGuiCond_FirstUseEver); // width and height of the window
+
+    ImGui::Begin("Dropdown Menu");
+    {
+        static int selectedColorIndex = 0;
+        const char *colorOptions[] = {"Red", "Green", "Blue", "Yellow", "Purple"};
+        ImGui::Combo("Color", &selectedColorIndex, colorOptions, IM_ARRAYSIZE(colorOptions));
+    }
+    ImGui::End();
 }
 
 void display(void)
