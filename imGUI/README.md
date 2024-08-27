@@ -15,7 +15,7 @@ git clone https://github.com/ocornut/imgui.git
 ```
 ### Include ImGui in the Project
 	
-Navigate to the imgui folder and add the following files to the it:
+Navigate to the imgui folder and add the following files to it:
 	
 	imconfig.h
  	imgui.config 
