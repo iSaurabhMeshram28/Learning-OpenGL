@@ -113,10 +113,9 @@ void imgui_initialization(void)
         uninitialize();
     }
 
-    // ImGuiIO& io = ImGui::GetIO();
-    // io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-    // io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-    // io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+    // Enable docking
+    ImGuiIO& io = ImGui::GetIO();
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable Docking
 
     if (ImGui_ImplWin32_InitForOpenGL(ghwnd) == false)
     {
@@ -126,7 +125,7 @@ void imgui_initialization(void)
 
     if (ImGui_ImplOpenGL3_Init("#version 460") == false)
     {
-        fprintf(gpFile, "ImGui_ImplWin32_InitForOpenGL(ghwnd) Failed \n");
+        fprintf(gpFile, "ImGui_ImplOpenGL3_Init() Failed \n");
         uninitialize();
     }
 
@@ -253,8 +252,8 @@ int initialize(void)
     // print gL info
     printGLInfo();
 
-    GLuint vertexShaderObject = loadShader(GL_VERTEX_SHADER, "Shaders/vertexShader.glsl");
-    GLuint fragmentShaderObject = loadShader(GL_FRAGMENT_SHADER, "Shaders/fragmentShader.glsl");
+    GLuint vertexShaderObject = loadShader(GL_VERTEX_SHADER, "Shaders/vertexShader.vert");
+    GLuint fragmentShaderObject = loadShader(GL_FRAGMENT_SHADER, "Shaders/fragmentShader.frag");
 
     // Shader Program
     shaderProgramObject = glCreateProgram();
@@ -352,14 +351,13 @@ void printGLInfo(void)
 
 void resize(int width, int height)
 {
-    // Code
     if (height <= 0)
         height = 1;
 
     // Set the viewport to match the window dimensions
     glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 
-    // set perspectiveProjectionMatrix
+    // Update perspective projection matrix
     perspectiveProjectionMatrix = vmath::perspective(45.0f, (GLfloat)width / (GLfloat)height, 0.1f, 100.0f);
 }
 
@@ -369,7 +367,6 @@ void imgui_display(void)
     ImGui_ImplWin32_NewFrame();
     ImGui_ImplOpenGL3_NewFrame();
     ImGui::NewFrame();
-    // ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport());
 
     ImGui::Begin("PerVertex Color Sliders");
     {
@@ -377,18 +374,7 @@ void imgui_display(void)
         ImGui::SliderFloat3("Left Bottom Vertex", bottomLeftVertexColor, 0.0f, 1.0f);
         ImGui::SliderFloat3("Right Bottom Vertex", bottomRightVertexColor, 0.0f, 1.0f);
     }
-    ImGui::End();
-
-    ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_FirstUseEver);      // top-left corner
-    ImGui::SetNextWindowSize(ImVec2(150, 100), ImGuiCond_FirstUseEver); // width and height of the window
-
-    ImGui::Begin("Dropdown Menu");
-    {
-        static int selectedColorIndex = 0;
-        const char *colorOptions[] = {"Red", "Green", "Blue", "Yellow", "Purple"};
-        ImGui::Combo("Color", &selectedColorIndex, colorOptions, IM_ARRAYSIZE(colorOptions));
-    }
-    ImGui::End();
+    ImGui::End();    
 }
 
 void display(void)
@@ -438,13 +424,6 @@ void display(void)
 
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-    // ImGuiIO& io = ImGui::GetIO();
-    // if ( io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable )
-    // {
-    // 	ImGui::UpdatePlatformWindows();
-    // 	ImGui::RenderPlatformWindowsDefault();
-    // }
 
     // Swap buffer
     SwapBuffers(ghdc);
