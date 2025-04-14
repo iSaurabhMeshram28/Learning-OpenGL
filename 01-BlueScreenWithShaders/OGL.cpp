@@ -1,6 +1,8 @@
 #include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <fstream>
+#include <sstream>
 #include <gl/glew.h>
 #include <gl/GL.h>
 #include "OGL.h"
@@ -11,6 +13,8 @@
 
 #pragma comment(lib, "glew32.lib")
 #pragma comment(lib, "OpenGL32.lib")
+
+using namespace std;
 
 class OpenGLApp
 {
@@ -26,8 +30,8 @@ private:
     WINDOWPLACEMENT wpPrev;
 
 public:
-    OpenGLApp::OpenGLApp() : ghwnd(NULL), ghdc(NULL), ghrc(NULL), gpFile(NULL), shaderProgramObject(0),
-                             gbFullscreen(FALSE), gbActive(FALSE), dwStyle(0), wpPrev({sizeof(WINDOWPLACEMENT)})
+    OpenGLApp() : ghwnd(NULL), ghdc(NULL), ghrc(NULL), gpFile(NULL), shaderProgramObject(0),
+                  gbFullscreen(FALSE), gbActive(FALSE), dwStyle(0), wpPrev({sizeof(WINDOWPLACEMENT)})
     {
         fopen_s(&gpFile, "Log.txt", "w");
         if (!gpFile)
@@ -236,14 +240,35 @@ private:
         fprintf(gpFile, "OpenGL Version: %s\n", glGetString(GL_VERSION));
     }
 
+    // Helper function to read shader source from a file
+    string readShaderSource(const char *filePath)
+    {
+        ifstream file(filePath);
+        if (!file.is_open())
+        {
+            logError("Failed to open shader file");
+            return "";
+        }
+
+        stringstream buffer;
+        buffer << file.rdbuf();
+        return buffer.str();
+    }
+
     void setupShaders()
     {
-        const GLchar *vertexShaderSource =
-            "#version 460 core\n"
-            "void main() { }";
+        string vertexShaderSource = readShaderSource("vertex_shader.glsl");
+        string fragmentShaderSource = readShaderSource("fragment_shader.glsl");
 
+        if (vertexShaderSource.empty() || fragmentShaderSource.empty())
+        {
+            logError("Shader source is empty");
+            return;
+        }
+
+        const GLchar *vertexShaderCode = vertexShaderSource.c_str();
         GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-        glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+        glShaderSource(vertexShader, 1, &vertexShaderCode, NULL);
         glCompileShader(vertexShader);
 
         GLint success;
@@ -256,12 +281,9 @@ private:
             logError(infoLog);
         }
 
-        const GLchar *fragmentShaderSource =
-            "#version 460 core\n"
-            "void main() { }";
-
+        const GLchar *fragmentShaderCode = fragmentShaderSource.c_str();
         GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-        glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+        glShaderSource(fragmentShader, 1, &fragmentShaderCode, NULL);
         glCompileShader(fragmentShader);
 
         glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
