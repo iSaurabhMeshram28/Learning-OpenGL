@@ -1,6 +1,0 @@
-Program Started Successfully
-OpenGL Vendor : NVIDIA Corporation
-OpenGL Renderer : NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2
-OpenGL Version : 4.6.0 NVIDIA 561.09
-GLSL Version : 4.60 NVIDIA
-Program Ended Successfully
