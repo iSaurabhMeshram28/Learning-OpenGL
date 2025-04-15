@@ -363,7 +363,7 @@ void OpenGLApp::display()
     SwapBuffers(ghdc);
 }
 
-// Updates application logic (currently empty)
+// Updates application logic
 void OpenGLApp::update()
 {
     // Update logic here
