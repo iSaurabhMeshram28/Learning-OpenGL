@@ -15,6 +15,7 @@ The repository is structured to cover different aspects of OpenGL development, i
    - Post-processing effects
 
 ## Resources
+- AstroMediComp's RTR Assignments
 - [OpenGL Official Documentation](https://www.opengl.org/documentation/)
 - [Learn OpenGL](https://learnopengl.com/) by Joey de Vries
 - [The OpenGL Programming Guide](https://www.amazon.com/OpenGL-Programming-Guide-Official-Learning/dp/0134495497)
