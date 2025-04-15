@@ -1,0 +1,12 @@
+#include <windows.h>
+
+#include "OGL.h"
+
+MYICON ICON MyIcon.ico
+
+FRONT_TEXTURE BITMAP grass_side.bmp
+BACK_TEXTURE BITMAP grass_side.bmp
+LEFT_TEXTURE BITMAP grass_side.bmp
+RIGHT_TEXTURE BITMAP grass_side.bmp
+TOP_TEXTURE BITMAP grass.bmp
+BOTTOM_TEXTURE BITMAP dirt.bmp

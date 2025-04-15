@@ -1,0 +1,10 @@
+#pragma once
+
+#define MYICON 101
+
+#define FRONT_TEXTURE 102
+#define BACK_TEXTURE 103
+#define LEFT_TEXTURE 104
+#define RIGHT_TEXTURE 105
+#define TOP_TEXTURE 106
+#define BOTTOM_TEXTURE 107
