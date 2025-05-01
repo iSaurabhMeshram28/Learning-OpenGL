@@ -1,4 +1,3 @@
-// ```glsl
 #version 460 core
 in vec4 aPosition;
 in vec2 aTexCoord;
@@ -8,4 +7,3 @@ void main() {
     gl_Position = uMVPMatrix * aPosition;
     oTexCoord = aTexCoord;
 }
-// ```
