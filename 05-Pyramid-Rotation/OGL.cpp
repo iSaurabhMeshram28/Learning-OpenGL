@@ -316,8 +316,8 @@ int OpenGLApp::initialize(HWND hwnd)
 // Sets up shaders for rendering
 void OpenGLApp::setupShaders()
 {
-    string vertexShaderSource = readShaderSource("vertexShader.vs");
-    string fragmentShaderSource = readShaderSource("fragmentShader.fs");
+    string vertexShaderSource = readShaderSource("vertexShader.vert");
+    string fragmentShaderSource = readShaderSource("fragmentShader.frag");
 
     if (vertexShaderSource.empty() || fragmentShaderSource.empty())
     {
