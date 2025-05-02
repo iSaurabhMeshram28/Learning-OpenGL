@@ -1,3 +1,5 @@
 *.vert linguist-language=GLSL
 *.frag linguist-language=GLSL
+*.tcs linguist-language=GLSL
+*.tes linguist-language=GLSL
 
